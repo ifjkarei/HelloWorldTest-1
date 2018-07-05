@@ -1,15 +1,16 @@
 package test;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 public class CarController {
 
-    @Autowired
-    private CarRepository repository;
+    private final CarRepository repository;
 
     @PostMapping("/cars")
     public String addCar(@RequestParam(value="tipus") String tipus,

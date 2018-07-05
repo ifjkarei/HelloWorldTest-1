@@ -1,11 +1,13 @@
 package test;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Data
 @Entity
 @Table(name = "car")
 public class Car implements Serializable {
@@ -38,46 +40,6 @@ public class Car implements Serializable {
         this.tipus = tipus;
         this.marka = marka;
         this.evjarat = evjarat;
-        this.allapot = allapot;
-    }
-
-    String getRendszam() {
-        return rendszam;
-    }
-
-    String getTipus() {
-        return tipus;
-    }
-
-    String getMarka() {
-        return marka;
-    }
-
-    int getEvjarat() {
-        return evjarat;
-    }
-
-    Status getAllapot() {
-        return allapot;
-    }
-
-    public void setRendszam(String rendszam) {
-        this.rendszam = rendszam;
-    }
-
-    void setTipus(String tipus) {
-        this.tipus = tipus;
-    }
-
-    void setMarka(String marka) {
-        this.marka = marka;
-    }
-
-    void setEvjarat(int evjarat) {
-        this.evjarat = evjarat;
-    }
-
-    void setAllapot(Status allapot) {
         this.allapot = allapot;
     }
 
