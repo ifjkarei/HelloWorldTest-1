@@ -1,5 +1,5 @@
 package test;
-//HELLO
+//SZIA
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
