@@ -1,7 +1,5 @@
 package test;
-//SZIA
-//HELLO
-//hello
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -33,33 +31,33 @@ public class Car implements Serializable {
 
     public Car(){}
 
-    public Car(String tipus,
-               String marka,
-               int evjarat,
-               Status allapot){
+    Car(String tipus,
+        String marka,
+        int evjarat,
+        Status allapot){
         this.tipus = tipus;
         this.marka = marka;
         this.evjarat = evjarat;
         this.allapot = allapot;
     }
 
-    public String getRendszam() {
+    String getRendszam() {
         return rendszam;
     }
 
-    public String getTipus() {
+    String getTipus() {
         return tipus;
     }
 
-    public String getMarka() {
+    String getMarka() {
         return marka;
     }
 
-    public int getEvjarat() {
+    int getEvjarat() {
         return evjarat;
     }
 
-    public Status getAllapot() {
+    Status getAllapot() {
         return allapot;
     }
 
@@ -67,30 +65,30 @@ public class Car implements Serializable {
         this.rendszam = rendszam;
     }
 
-    public void setTipus(String tipus) {
+    void setTipus(String tipus) {
         this.tipus = tipus;
     }
 
-    public void setMarka(String marka) {
+    void setMarka(String marka) {
         this.marka = marka;
     }
 
-    public void setEvjarat(int evjarat) {
+    void setEvjarat(int evjarat) {
         this.evjarat = evjarat;
     }
 
-    public void setAllapot(Status allapot) {
+    void setAllapot(Status allapot) {
         this.allapot = allapot;
     }
 
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Rendszam: " + rendszam + ", ");
-        sb.append("Tipus: " + tipus + ", ");
-        sb.append("Marka : " + marka + ", ");
-        sb.append("Evjarat: " + evjarat + ", ");
-        sb.append("Allapot: " + allapot);
+        sb.append("Rendszam: ").append(rendszam).append(", ");
+        sb.append("Tipus: ").append(tipus).append(", ");
+        sb.append("Marka : ").append(marka).append(", ");
+        sb.append("Evjarat: ").append(evjarat).append(", ");
+        sb.append("Allapot: ").append(allapot);
         return sb.toString();
     }
 }
