@@ -1,5 +1,6 @@
 package test;
 //HELLO
+//hello
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
