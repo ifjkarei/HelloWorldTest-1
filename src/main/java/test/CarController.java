@@ -9,10 +9,9 @@ import java.util.List;
 public class CarController {
 
     @Autowired
-    CarRepository repository;
+    private CarRepository repository;
 
     @PostMapping("/cars")
-    //@RequestMapping(value = "/addcar", method = RequestMethod.POST)
     public String addCar(@RequestParam(value="tipus") String tipus,
                        @RequestParam(value="marka") String marka,
                        @RequestParam(value="evjarat") int evjarat,
@@ -42,29 +41,49 @@ public class CarController {
     }
 
     @GetMapping("cars/car")
-    public String findId(@RequestParam("rendszam") String rendszam){
-        return repository.findByRendszam(rendszam).toString();
+    public String find(@RequestParam(value = "rendszam", defaultValue="") String rendszam,
+                       @RequestParam(value = "tipus", defaultValue="") String tipus,
+                       @RequestParam(value = "marka", defaultValue="") String marka,
+                       @RequestParam(value = "evjarat", defaultValue="") String evjarat,
+                       @RequestParam(value = "allapot", defaultValue="") String allapot){
+        StringBuilder sb = new StringBuilder();
+        for(Car c : repository.findAll()){
+            if((rendszam.isEmpty()  || c.getRendszam().equals(rendszam)) &&
+               (tipus.isEmpty()     || c.getTipus().equals(tipus)) &&
+               (marka.isEmpty()     || c.getMarka().equals(marka)) &&
+               (evjarat.isEmpty()   || c.getEvjarat() == (Integer.parseInt(evjarat))) &&
+               (rendszam.isEmpty()  || c.getAllapot().equals(Status.valueOf(allapot))) &&
+               (!(rendszam+tipus+marka+evjarat+allapot).equals(""))){
+                sb.append(c.toString()).append(" ");
+            }
+
+        }
+        return sb.toString();
     }
 
     @DeleteMapping("cars/car")
-    public String deleteId(@RequestParam("rendszam") String rendszam){
+    public String deleteId(@RequestParam(value = "rendszam") String rendszam){
         repository.deleteById(rendszam);
         return "Done";
     }
 
     @PatchMapping("/cars/car/")
-    public String updateAllapot(
-            @RequestBody CarAllapot carAllapot) {
-
-        repository.findByRendszam(carAllapot.getRendszam()).get(0).setAllapot(carAllapot.getAllapot());
+    public String update(String rendszam,
+                         @RequestParam(value = "tipus", defaultValue="") String tipus,
+                         @RequestParam(value = "marka", defaultValue="") String marka,
+                         @RequestParam(value = "evjarat", defaultValue="") String evjarat,
+                         @RequestParam(value = "allapot", defaultValue="") String allapot) {
+        Car car = repository.findByRendszam(rendszam).get(0);
+        if(!tipus.isEmpty()) car.setTipus(tipus);
+        if(!marka.isEmpty()) car.setMarka(marka);
+        if(!evjarat.isEmpty()) car.setEvjarat(Integer.parseInt(evjarat));
+        if(!allapot.isEmpty()) car.setAllapot(Status.valueOf(allapot));
         repository.flush();
         return "Done";
     }
 
     @PutMapping("/cars/car/")
-    public String updateAll(
-            @RequestBody Car car) {
-
+    public String updateAll(@RequestBody Car car) {
         Car oldCar = repository.findByRendszam(car.getRendszam()).get(0);
         oldCar.setTipus(car.getTipus());
         oldCar.setMarka(car.getMarka());
