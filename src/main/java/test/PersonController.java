@@ -21,7 +21,7 @@ public class PersonController {
     }
 
     @GetMapping("/people")
-    public List<Person> listPersons(){
+    public List<Person> listPeople(){
         return personRepository.findAll();
     }
 
@@ -43,7 +43,7 @@ public class PersonController {
                        @RequestParam(value = "telnum", defaultValue="") String telnum) {
         StringBuilder sb = new StringBuilder();
         for (Person p : personRepository.findAll()) {
-            if ((person_id.isEmpty() || p.getPerson_id().equals(person_id) &&
+            if ((person_id.isEmpty() || p.getPersonId().equals(person_id) &&
                     (name.isEmpty() || p.getName().equals(name)) &&
                     (telnum.isEmpty() || p.getTelnum().equals(telnum)) &&
                     (!(person_id + name + telnum).equals("")))) {
@@ -55,13 +55,13 @@ public class PersonController {
     }
 
     @DeleteMapping("/people/person")
-    public String deleteId(@RequestParam(value = "id") String person_id){
+    public String deleteById(@RequestParam(value = "id") String person_id){
         personRepository.deleteById(person_id);
         return "Done";
     }
 
     @PatchMapping("/people/person/")
-    public String update(String person_id,
+    public String updateById(String person_id,
                          @RequestParam(value = "name", defaultValue="") String name,
                          @RequestParam(value = "telnum", defaultValue="") String telnum) {
         Person person = personRepository.findById(person_id).get();
@@ -73,7 +73,7 @@ public class PersonController {
 
     @PutMapping("/people/person/")
     public String updateAll(@RequestBody Person person) {
-        Person oldPerson = personRepository.findById(person.getPerson_id()).get();
+        Person oldPerson = personRepository.findById(person.getPersonId()).get();
         oldPerson.setName(person.getName());
         oldPerson.setTelnum(person.getTelnum());
         personRepository.flush();

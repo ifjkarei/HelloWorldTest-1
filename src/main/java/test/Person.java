@@ -15,14 +15,16 @@ public class Person {
 
     @Id
     @NotNull
-    @Column(name = "person_id")
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String person_id;
-    @Column(name = "name")
+    private String personId;
+
+    @NotNull
     private String name;
-    @Column(name = "telnum")
+
+    @NotNull
     private String telnum;
+
     @OneToMany(mappedBy="owner")
     private List<Car> ownedCars;
 
