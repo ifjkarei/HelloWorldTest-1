@@ -11,10 +11,6 @@ public class CarController {
 
     private final CarRepository repository;
 
-    public void addCarToPerson(String name, String brand, int year, Status condition, Person owner){
-        repository.save(new Car(name, brand, year, condition, owner));
-    }
-
     @GetMapping("/cars")
     public List<Car> listCars(){
         return repository.findAll();

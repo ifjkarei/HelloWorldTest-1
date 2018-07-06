@@ -19,24 +19,31 @@ public class Car implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "car_id")
     private String car_id;
+
     @NotNull
     @Column(name = "name")
     private String name;
+
     @NotNull
     @Column(name = "brand")
     private String brand;
+
     @NotNull
     @Column(name = "year")
     private int year;
+
     @NotNull
     @Column(name = "condition")
     private Status condition;
+
     @JsonIgnore
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
     private Person owner;
-    private String owner_id;
+
+    //@Transient
+    private String ownerId;
 
     public Car(){}
 
@@ -50,7 +57,7 @@ public class Car implements Serializable {
         this.year = year;
         this.condition = condition;
         this.owner = owner;
-        this.owner_id = owner.getPerson_id();
+        this.ownerId = owner.getPerson_id();
     }
 
     @Override
@@ -61,7 +68,7 @@ public class Car implements Serializable {
         sb.append("brand : ").append(brand).append(", ");
         sb.append("year: ").append(year).append(", ");
         sb.append("condition: ").append(condition).append(", ");
-        sb.append("owner_id: ").append(owner_id);
+        sb.append("ownerId: ").append(ownerId);
         return sb.toString();
     }
 }
