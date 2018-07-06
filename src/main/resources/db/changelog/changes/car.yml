@@ -1,33 +1,33 @@
 databaseChangeLog:
   - changeSet:
       id: v1
-      author: pp
+      author: ppolena
       changes:
       - createTable:
           tableName: car
           columns:
           - column:
-              name: rendszam
+              name: id
               type: varchar2(50)
               constraints:
                 primaryKey: true
           - column:
-              name: tipus
+              name: name
               type: varchar2(50)
               constraints:
                 nullable: false
           - column:
-              name: marka
+              name: brand
               type: varchar2(50)
               constraints:
                 nullable: false
           - column:
-              name: evjarat
+              name: year
               type: int
               constraints:
                 nullable: false
           - column:
-              name: allapot
+              name: condition
               type: varchar2(50)
               constraints:
                 nullable: false

@@ -1,5 +1,5 @@
 package test;
 
 public enum Status {
-    Jó, Elfogadható, Rossz
+    Excellent, Good, Acceptable, Bad
 }

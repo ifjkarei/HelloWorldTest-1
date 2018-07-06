@@ -16,41 +16,41 @@ public class Car implements Serializable {
     @NotNull
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "rendszam")
-    private String rendszam;
+    @Column(name = "id")
+    private String id;
     @NotNull
-    @Column(name = "tipus")
-    private String tipus;
+    @Column(name = "name")
+    private String name;
     @NotNull
-    @Column(name = "marka")
-    private String marka;
+    @Column(name = "brand")
+    private String brand;
     @NotNull
-    @Column(name = "evjarat")
-    private int evjarat;
+    @Column(name = "year")
+    private int year;
     @NotNull
-    @Column(name = "allapot")
-    private Status allapot;
+    @Column(name = "condition")
+    private Status condition;
 
     public Car(){}
 
-    Car(String tipus,
-        String marka,
-        int evjarat,
-        Status allapot){
-        this.tipus = tipus;
-        this.marka = marka;
-        this.evjarat = evjarat;
-        this.allapot = allapot;
+    Car(String name,
+        String brand,
+        int year,
+        Status condition){
+        this.name = name;
+        this.brand = brand;
+        this.year = year;
+        this.condition = condition;
     }
 
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Rendszam: ").append(rendszam).append(", ");
-        sb.append("Tipus: ").append(tipus).append(", ");
-        sb.append("Marka : ").append(marka).append(", ");
-        sb.append("Evjarat: ").append(evjarat).append(", ");
-        sb.append("Allapot: ").append(allapot);
+        sb.append("id: ").append(id).append(", ");
+        sb.append("name: ").append(name).append(", ");
+        sb.append("brand : ").append(brand).append(", ");
+        sb.append("year: ").append(year).append(", ");
+        sb.append("condition: ").append(condition);
         return sb.toString();
     }
 }
