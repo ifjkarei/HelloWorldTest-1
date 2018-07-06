@@ -1,5 +1,6 @@
 package test;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,8 +17,8 @@ public class Car implements Serializable {
     @NotNull
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
-    private String id;
+    @Column(name = "car_id")
+    private String car_id;
     @NotNull
     @Column(name = "name")
     private String name;
@@ -30,27 +31,37 @@ public class Car implements Serializable {
     @NotNull
     @Column(name = "condition")
     private Status condition;
+    @JsonIgnore
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Person owner;
+    private String owner_id;
 
     public Car(){}
 
     Car(String name,
         String brand,
         int year,
-        Status condition){
+        Status condition,
+        Person owner){
         this.name = name;
         this.brand = brand;
         this.year = year;
         this.condition = condition;
+        this.owner = owner;
+        this.owner_id = owner.getPerson_id();
     }
 
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("id: ").append(id).append(", ");
+        sb.append("id: ").append(car_id).append(", ");
         sb.append("name: ").append(name).append(", ");
         sb.append("brand : ").append(brand).append(", ");
         sb.append("year: ").append(year).append(", ");
-        sb.append("condition: ").append(condition);
+        sb.append("condition: ").append(condition).append(", ");
+        sb.append("owner_id: ").append(owner_id);
         return sb.toString();
     }
 }
