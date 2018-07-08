@@ -3,6 +3,7 @@ package test;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,8 +22,17 @@ public class PersonController {
     }
 
     @GetMapping("/people")
-    public List<Person> listPeople(){
-        return personRepository.findAll();
+    public String listPeople(){
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"people\":");
+        List<String> resultList = new LinkedList<>();
+        for(Person p : personRepository.findAll()){
+            resultList.add(p.toString());
+        }
+        sb.append(resultList.toString());
+        sb.append("}");
+        return sb.toString();
     }
 
     @PostMapping("/people/person")
@@ -42,15 +52,18 @@ public class PersonController {
                        @RequestParam(value = "name", defaultValue="") String name,
                        @RequestParam(value = "telnum", defaultValue="") String telnum) {
         StringBuilder sb = new StringBuilder();
+        sb.append("{\"result\":");
+        List<String> resultList = new LinkedList<>();
         for (Person p : personRepository.findAll()) {
             if ((person_id.isEmpty() || p.getPersonId().equals(person_id) &&
-                    (name.isEmpty() || p.getName().equals(name)) &&
-                    (telnum.isEmpty() || p.getTelnum().equals(telnum)) &&
-                    (!(person_id + name + telnum).equals("")))) {
-                sb.append(p.toString()).append(" ");
+                (name.isEmpty() || p.getName().equals(name)) &&
+                (telnum.isEmpty() || p.getTelnum().equals(telnum)) &&
+                (!(person_id + name + telnum).equals("")))) {
+                resultList.add(p.toString());
             }
-
         }
+        sb.append(resultList.toString());
+        sb.append("}");
         return sb.toString();
     }
 
@@ -62,8 +75,8 @@ public class PersonController {
 
     @PatchMapping("/people/person/")
     public String updateById(String person_id,
-                         @RequestParam(value = "name", defaultValue="") String name,
-                         @RequestParam(value = "telnum", defaultValue="") String telnum) {
+                            @RequestParam(value = "name", defaultValue="") String name,
+                            @RequestParam(value = "telnum", defaultValue="") String telnum) {
         Person person = personRepository.findById(person_id).get();
         if(!name.isEmpty()) person.setName(name);
         if(!telnum.isEmpty()) person.setTelnum(telnum);

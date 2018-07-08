@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -33,7 +33,7 @@ public class Person {
     public Person(String name, String telnum){
         this.name = name;
         this.telnum = telnum;
-        this.ownedCars = new ArrayList<>();
+        this.ownedCars = new LinkedList<>();
     }
 
     public String addCar(Car car){
@@ -44,8 +44,16 @@ public class Person {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("name: ").append(name).append(", ");
-        sb.append("telnum: ").append(telnum);
+        sb.append("{\"personId\":\"").append(personId).append("\", ");
+        sb.append("\"name\":\"").append(name).append("\", ");
+        sb.append("\"telnum\":\"").append(telnum).append("\", ");
+        sb.append("\"ownedCars\":");
+        List<String> resultList = new LinkedList<>();
+        for(Car c : ownedCars){
+            resultList.add("\"" + c.getCarId() + "\"");
+        }
+        sb.append(resultList.toString());
+        sb.append("}");
         return sb.toString();
     }
 }

@@ -54,12 +54,12 @@ public class Car implements Serializable {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("carId: ").append(carId).append(", ");
-        sb.append("name: ").append(name).append(", ");
-        sb.append("brand : ").append(brand).append(", ");
-        sb.append("year: ").append(year).append(", ");
-        sb.append("condition: ").append(condition).append(", ");
-        sb.append("ownerId: ").append(owner.getPersonId());
+        sb.append("{\"carId\":\"").append(carId).append("\", ");
+        sb.append("\"name\":\"").append(name).append("\", ");
+        sb.append("\"brand\":\"").append(brand).append("\", ");
+        sb.append("\"year\":").append(year).append(", ");
+        sb.append("\"condition\":\"").append(condition).append("\", ");
+        sb.append("\"ownerId\":\"").append(owner.getPersonId()).append("\"}");
         return sb.toString();
     }
 }

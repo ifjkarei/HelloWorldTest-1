@@ -3,6 +3,9 @@ package test;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class CarController {
@@ -13,10 +16,13 @@ public class CarController {
     public String listCars(){
 
         StringBuilder sb = new StringBuilder();
+        sb.append("{\"cars\":");
+        List<String> resultList = new LinkedList<>();
         for(Car c : carRepository.findAll()){
-            sb.append("[ ").append(c.toString()).append(" ]");
+            resultList.add(c.toString());
         }
-        sb.append(" ");
+        sb.append(resultList.toString());
+        sb.append("}");
         return sb.toString();
     }
 
@@ -27,17 +33,20 @@ public class CarController {
                        @RequestParam(value = "year", defaultValue="") String year,
                        @RequestParam(value = "condition", defaultValue="") String condition){
         StringBuilder sb = new StringBuilder();
+        sb.append("{\"result\":");
+        List<String> resultList = new LinkedList<>();
         for(Car c : carRepository.findAll()){
-            if((car_id.isEmpty()  || c.getCarId().equals(car_id)) &&
-               (name.isEmpty()     || c.getName().equals(name)) &&
+            if((car_id.isEmpty()    || c.getCarId().equals(car_id)) &&
+               (name.isEmpty()      || c.getName().equals(name)) &&
                (brand.isEmpty()     || c.getBrand().equals(brand)) &&
-               (year.isEmpty()   || c.getYear() == (Integer.parseInt(year))) &&
-               (condition.isEmpty()  || c.getCondition().equals(Status.valueOf(condition))) &&
+               (year.isEmpty()      || c.getYear() == (Integer.parseInt(year))) &&
+               (condition.isEmpty() || c.getCondition().equals(Status.valueOf(condition))) &&
                (!(car_id+name+brand+year+condition).equals(""))){
-                sb.append(c.toString()).append(" ");
+                resultList.add(c.getCarId());
             }
-
         }
+        sb.append(resultList.toString());
+        sb.append("}");
         return sb.toString();
     }
 
