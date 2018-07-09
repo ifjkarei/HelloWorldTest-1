@@ -28,7 +28,7 @@ public class Person {
     @OneToMany(mappedBy="owner")
     private List<Car> ownedCars;
 
-    protected Person(){}
+    public Person(){}
 
     public Person(String name, String telnum){
         this.name = name;
