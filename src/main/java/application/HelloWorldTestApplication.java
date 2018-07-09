@@ -1,9 +1,10 @@
-package test;
+package application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import repositories.CarRepository;
 
 @RequiredArgsConstructor
 @SpringBootApplication

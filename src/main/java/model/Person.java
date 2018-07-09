@@ -1,4 +1,4 @@
-package test;
+package model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

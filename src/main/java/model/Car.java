@@ -1,4 +1,4 @@
-package test;
+package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -39,7 +39,7 @@ public class Car implements Serializable {
 
     public Car(){}
 
-    Car(String name,
+    public Car(String name,
         String brand,
         int year,
         Status condition,
