@@ -13,10 +13,6 @@ import java.util.List;
 @RestController
 public class CarController {
 
-    //testing
-    //asd
-    //pull
-    //pull01
     private final CarRepository carRepository;
 
     @GetMapping("/cars")
