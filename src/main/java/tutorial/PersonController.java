@@ -1,12 +1,7 @@
-package controllers;
+package tutorial;
 
-import model.Car;
-import model.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import repositories.CarRepository;
-import repositories.PersonRepository;
-import model.Status;
 
 import java.util.LinkedList;
 import java.util.List;

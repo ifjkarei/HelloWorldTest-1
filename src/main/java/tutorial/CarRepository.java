@@ -1,8 +1,6 @@
-package repositories;
+package tutorial;
 
-import model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
-import model.Status;
 
 import java.util.List;
 

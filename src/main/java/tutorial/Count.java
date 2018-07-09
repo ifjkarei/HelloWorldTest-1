@@ -1,4 +1,4 @@
-package model;
+package tutorial;
 
 public class Count {
     private final int sum;
